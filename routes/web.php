@@ -16,3 +16,18 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->get('/users', UsersTable::class)
     ->name('users');
 
+Route::group(['middleware' => [
+    'auth:sanctum',
+    'verified'
+]], function () {
+    
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/planes', function () {
+        return view('admin.planes');
+    })->name('planes');
+
+});
